@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+
+    triggers {
+        pollSCM('* * * * *')
+    }
+
+    stages {
+        stage('Pull') {
+            steps {
+                git credentialsId: 'PersonalAccessToken', url: 'https://github.com/mis3003/currency-exchange'
+            }
+        }
+        
+        stage('Files') {
+            steps {
+                echo "Checking files..."
+                sh '''
+                ls
+                '''
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building..."
+                sh '''
+                cd currency-exchange-files-docker
+                docker build -f Dockerfile.build -t build_stage .
+                '''
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Testing..."
+                sh '''
+                cd currency-exchange-files-docker
+                docker build -f Dockerfile.test -t test_stage .
+                '''
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo "Deploying..."
+                sh '''
+                cd currency-exchange-files-docker
+                docker compose up
+                '''
+            }
+        }
+
+        stage('Finish') {
+            steps {
+                echo "Finishing..."
+                sh '''
+                cd currency-exchange-files-docker
+                docker compose down
+                '''
+            }
+        }
+    }
+}

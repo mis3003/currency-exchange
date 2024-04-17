@@ -1,0 +1,5 @@
+FROM build_stage
+
+WORKDIR /app/currency-exchange
+
+CMD ["mvn","test"]
