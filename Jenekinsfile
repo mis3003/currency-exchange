@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo "Building..."
                 sh '''
-                cd currency-exchange-files-docker
+              
                 docker build -f Dockerfile.build -t build_stage .
                 '''
             }
@@ -35,7 +35,7 @@ pipeline {
             steps {
                 echo "Testing..."
                 sh '''
-                cd currency-exchange-files-docker
+              
                 docker build -f Dockerfile.test -t test_stage .
                 '''
             }
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 echo "Deploying..."
                 sh '''
-                cd currency-exchange-files-docker
+                
                 docker compose up
                 '''
             }
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 echo "Finishing..."
                 sh '''
-                cd currency-exchange-files-docker
+               
                 docker compose down
                 '''
             }
