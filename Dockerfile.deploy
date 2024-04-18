@@ -1,4 +1,4 @@
-FROM build_stage:11
+FROM build_stage
 
 WORKDIR  /app/currency-exchange/target
 
