@@ -45,7 +45,7 @@ pipeline {
                 echo "Deploying..."
                 sh '''
                 
-                docker build -f Dockerfile.deploy -t deploy_stage
+                docker build -f Dockerfile.deploy -t deploy_stage .
                 '''
             }
         }
