@@ -45,17 +45,17 @@ pipeline {
                 echo "Deploying..."
                 sh '''
                 
-                docker compose up
+                docker build -f Dockerfile.deploy -t deploy_stage
                 '''
             }
         }
 
-        stage('Finish') {
+        stage('Publish') {
             steps {
                 echo "Finishing..."
                 sh '''
                
-                docker compose down
+               
                 '''
             }
         }
