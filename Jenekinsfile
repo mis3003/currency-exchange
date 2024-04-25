@@ -50,7 +50,7 @@ pipeline {
                 echo "Testing..."
                 sh '''
               
-                docker build v -f Dockerfile.test -t test_stage .
+                docker build --no-cache -f Dockerfile.test -t test_stage .
                 '''
             }
         }
