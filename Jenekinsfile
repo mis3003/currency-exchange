@@ -71,7 +71,7 @@ pipeline {
                 echo "Finishing..."
                 sh '''
                docker run --name packing build_stage
-               docker cp artifact:app/currency-exchange/target/exchange-1.0-SNAPSHOT.jar .
+               docker cp packing:app/currency-exchange/target/exchange-1.0-SNAPSHOT.jar .
                
                 '''
             }
