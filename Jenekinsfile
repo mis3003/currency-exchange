@@ -26,8 +26,8 @@ pipeline {
                 docker image rm -f test_stage
                 docker image rm -f deploy_stage
                 
-            docker stop packing
-                docker container rm packing
+            docker stop curency-exchange
+                docker container rm packcurency-exchangeing
           
                 '''
             }
