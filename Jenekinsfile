@@ -20,8 +20,7 @@ pipeline {
                 docker image rm -f test_stage
                 docker image rm -f deploy_stage
                 
-                docker stop artifact
-                docker container rm artifact
+          
                 '''
             }
         }
@@ -59,7 +58,7 @@ pipeline {
             steps {
                 echo "Deploying..."
                 sh '''
-                
+           
                 docker build -f Dockerfile.deploy -t deploy_stage .
        docker run --rm deploy_stage
                 '''
