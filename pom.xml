@@ -48,17 +48,15 @@
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.2.2</version>
                 <configuration>
-                    <argLine>
-                        -javaagent:${settings.localRepository}/org/jmockit/jmockit/1.48/jmockit-1.48.jar
-                        -Dcoverage-output=html             <!-- or html-cp, serial, serial-append; if not set, defaults to "html" -->
-                        -Dcoverage-classes=loaded          <!-- or a "*" expression for class names; if not set, measures all production code classes -->
-                        -Dcoverage-outputDir="target/coverage-report"        <!-- default: target/coverage-report -->
-                        -Dcoverage-srcDirs="src"         <!-- default: all "src" directories -->
-                        -Dcoverage-check=80                <!-- default: no checks -->
-                    </argLine>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.exchange.app.App</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
