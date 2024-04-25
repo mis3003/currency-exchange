@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+
+    environment{
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+    }
+
+
     triggers {
         pollSCM('* * * * *')
     }
@@ -73,6 +79,15 @@ pipeline {
                 sh '''
                docker run --name packing build_stage
                docker cp packing:app/currency-exchange/target/exchange-1.0-SNAPSHOT.jar .
+
+
+
+                echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+               
+                docker tag curency-exchange:latest mis3003/curency-exchange:latest
+                docker push mis3003/curency-exchange:latest
+                docker logout
+
                
                 '''
             }
