@@ -26,8 +26,8 @@ pipeline {
                 docker image rm -f test_stage
                 docker image rm -f deploy_stage
                 
-            docker stop curency-exchange
-                docker container rm packcurency-exchangeing
+            docker stop deploy_stage
+                docker container rm deploy_stage
           
                 '''
             }
@@ -67,8 +67,8 @@ pipeline {
                 echo "Deploying..."
                 sh '''
            
-                docker build --no-cache -f Dockerfile.deploy -t curency-exchange:latest .
-       docker run --rm curency-exchange
+                docker build --no-cache -f Dockerfile.deploy -t deploy_stage .
+       docker run --rm deploy_stage
                 '''
             }
         }
@@ -82,10 +82,10 @@ pipeline {
 
 
 
-                echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-               
-                docker tag curency-exchange:latest mis3003/curency-exchange:latest
-                docker push mis3003/curency-exchange:latest
+            echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+
+                docker tag deploy_stage:latest mis3003/deploy_stage:latest
+                docker push mis3003/deploy_stage:latest
                 docker logout
 
                
