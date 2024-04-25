@@ -40,7 +40,7 @@ pipeline {
                 echo "Building..."
                 sh '''
               
-                docker build -f Dockerfile.build -t build_stage .
+                docker build --no-cache -f Dockerfile.build -t build_stage .
                 '''
             }
         }
@@ -50,7 +50,7 @@ pipeline {
                 echo "Testing..."
                 sh '''
               
-                docker build -f Dockerfile.test -t test_stage .
+                docker build v -f Dockerfile.test -t test_stage .
                 '''
             }
         }
@@ -59,7 +59,7 @@ pipeline {
                 echo "Deploying..."
                 sh '''
            
-                docker build -f Dockerfile.deploy -t deploy_stage .
+                docker build --no-cache -f Dockerfile.deploy -t deploy_stage .
        docker run --rm deploy_stage
                 '''
             }
