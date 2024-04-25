@@ -11,6 +11,21 @@ pipeline {
                 git credentialsId: 'PersonalAccessToken', url: 'https://github.com/mis3003/currency-exchange'
             }
         }
+
+             stage('Clean up') {
+            steps {
+                echo "Cleaning up wrokspace..."
+                sh '''
+                docker image rm -f build_stage
+                docker image rm -f test_stage
+                docker image rm -f deploy_stage
+                
+                docker stop artifact
+                docker container rm artifact
+                '''
+            }
+        }
+
         
         stage('Files') {
             steps {
@@ -44,7 +59,7 @@ pipeline {
             steps {
                 echo "Deploying..."
                 sh '''
-                cd currency-exchange-files-docker
+                
                 docker build -f Dockerfile.deploy -t deploy_stage .
        docker run --rm deploy_stage
                 '''
