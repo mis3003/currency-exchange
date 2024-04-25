@@ -44,9 +44,9 @@ pipeline {
             steps {
                 echo "Deploying..."
                 sh '''
-                
+                cd currency-exchange-files-docker
                 docker build -f Dockerfile.deploy -t deploy_stage .
-       
+       docker run --rm deploy_stage
                 '''
             }
         }
