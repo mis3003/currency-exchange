@@ -26,8 +26,7 @@ pipeline {
                 docker image rm -f test_stage
                 docker image rm -f deploy_stage
                 
-            docker stop deploy_stage
-                docker container rm deploy_stage
+    
           
                 '''
             }
