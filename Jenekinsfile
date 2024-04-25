@@ -68,7 +68,7 @@ pipeline {
                 sh '''
            
                 docker build --no-cache -f Dockerfile.deploy -t deploy_stage .
-       docker run --rm deploy_stage
+       docker run --rm curency-exchange:latest
                 '''
             }
         }
