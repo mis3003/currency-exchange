@@ -25,7 +25,7 @@ pipeline {
                 docker image rm -f build_stage
                 docker image rm -f test_stage
                 docker image rm -f deploy_stage
-                
+               
     
                  
 
@@ -77,8 +77,7 @@ pipeline {
             steps {
                 echo "Finishing..."
                 sh '''
-               docker run --name packing build_stage
-               docker cp packing:app/currency-exchange/target/exchange-1.0-SNAPSHOT.jar .
+               
 
 
 
